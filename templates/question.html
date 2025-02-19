@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Challenge - Question {{ question_id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .language-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            width: 200px;
+            background-color: white;
+        }
+        .code-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .image-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .test-cases {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .test-case {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .answer-section {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Debug Challenge - Question {{ question_id }}</h1>
+        </div>
+
+        <div class="question-description">
+            <h3>{{ question.description }}</h3>
+        </div>
+
+        <div class="language-selector">
+            <select id="language-select" onchange="changeLanguage()">
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="c">C</option>
+            </select>
+        </div>
+
+        <div class="code-section">
+            <div id="python-code" class="image-container">
+                <img src="{{ url_for('static', filename='images/' + question.python_image) }}" alt="Python Code">
+            </div>
+            <div id="java-code" class="image-container hidden">
+                <img src="{{ url_for('static', filename='images/' + question.java_image) }}" alt="Java Code">
+            </div>
+            <div id="c-code" class="image-container hidden">
+                <img src="{{ url_for('static', filename='images/' + question.c_image) }}" alt="C Code">
+            </div>
+        </div>
+
+        <div class="test-cases">
+            <h3>Test Cases:</h3>
+            {% for test_case in question.test_cases %}
+            <div class="test-case">
+                <strong>Input:</strong> {{ test_case.input }}<br>
+                <strong>Expected Output:</strong> {{ test_case.expected_output }}
+            </div>
+            {% endfor %}
+        </div>
+
+        <form method="post" class="answer-section" id="answerForm">
+            <label for="user_output">What's the bug fix? Enter the correct formula:</label><br>
+            <input type="text" id="user_output" name="user_output" required>
+            <button type="button" onclick="submitAnswer()">Submit Answer</button>
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Function to change displayed language
+        function changeLanguage() {
+            const language = document.getElementById('language-select').value;
+            
+            // Hide all code sections
+            document.getElementById('python-code').classList.add('hidden');
+            document.getElementById('java-code').classList.add('hidden');
+            document.getElementById('c-code').classList.add('hidden');
+            
+            // Show selected language
+            document.getElementById(language + '-code').classList.remove('hidden');
+        }
+
+        // Submit answer function
+        function submitAnswer() {
+            // Temporarily disable tab switch detection
+            window.onblur = null;
+            
+            // Submit the form
+            document.getElementById('answerForm').submit();
+        }
+
+        // Terminate exam on tab switch
+        window.onblur = function() {
+            window.location.href = "{{ url_for('exam_terminated') }}";
+        };
+
+        // Prevent right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Initialize with Python selected
+        changeLanguage();
+    </script>
+</body>
+</html>
