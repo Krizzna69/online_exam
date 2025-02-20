@@ -68,7 +68,7 @@ questions = [
             }
         ],
         "description": "Find the bug in the code that finds the middle node of a linked list. The code should handle both odd and even length lists. For even length, it should return the second middle element. Each language has the same logical error in the while loop condition. Fix the condition based on the language syntax.",
-       "correct_answer": "-1"
+       "correct_answer": "return -1"
     },
     {
         "id": 3,
@@ -108,7 +108,7 @@ questions = [
             }
         ],
         "description": "Find the bug in the code that calculates the maximum points that can be obtained by removing boxes with the given algorithm.",
-        "correct_answer": "Optimize subproblems"
+        "correct_answer": "m"
     },
     {
         "id": 5,
