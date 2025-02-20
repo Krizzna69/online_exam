@@ -29,23 +29,23 @@ questions = [
     {
         "id": 1,
         "java_image": "java_q1.png",
-        "c_image": "c_q1.png", 
+        "c_image": "c_q1.png",
         "python_image": "python_q1.png",
         "test_cases": [
             {
-                "input": "5",
-                "expected_output": "15"
+                "input": "nums = [2,7,11,15], target = 9",
+                "expected_output": "[0,1]"
             },
             {
-                "input": "3",
-                "expected_output": "6"
+                "input": "nums = [3,2,4], target = 6",
+                "expected_output": "[1,2]"
             },
             {
-                "input": "0",
-                "expected_output": "0"
+                "input": "nums = [3,3], target = 6",
+                "expected_output": "[0,1]"
             }
         ],
-        "description": "Find the bug in the code that calculates the sum of first n natural numbers.",
+        "description": "Find the bug in the code that calculates the sum of first n natural numbers and also solve the two sum problem.",
         "correct_answer": "i+1"
     },
     {
@@ -55,22 +55,75 @@ questions = [
         "python_image": "python_q2.png",
         "test_cases": [
             {
-                "input": "s = '()[]{}'",
-                "expected_output": "true"
+                "input": "LinkedList: 1->2->3->4->5",
+                "expected_output": "3 (middle element)"
             },
             {
-                "input": "s = \"(]\"",
-                "expected_output": "false"
+                "input": "LinkedList: 1->2->3->4->5->6",
+                "expected_output": "4 (second middle element for even length)"
             },
             {
-                "input": "s = \"([])\"",
-                "expected_output": "true"
+                "input": "LinkedList: 1",
+                "expected_output": "1 (single element)"
             }
         ],
-        "description": "Find the bug in the Valid Parentheses code. The code should validate if the string contains valid parentheses pairs.",
-        "correct_answer": "}"
+        "description": "Find the bug in the code that finds the middle node of a linked list. The code should handle both odd and even length lists. For even length, it should return the second middle element. Each language has the same logical error in the while loop condition. Fix the condition based on the language syntax.",
+       "correct_answer": "-1"
+    },
+    {
+        "id": 3,
+        "java_image": "java_q3.png",
+        "c_image": "c_q3.png",
+        "python_image": "python_q3.png",
+        "test_cases": [
+            {
+                "input": "root = [1,2,3]",
+                "expected_output": "6"
+            },
+            {
+                "input": "root = [-10,9,20,null,null,15,7]",
+                "expected_output": "42"
+            }
+        ],
+        "description": "Find the bug in the code that calculates the maximum path sum of a binary tree.",
+        "correct_answer": "return 0"
+    },
+    {
+        "id": 4,
+        "java_image": "java_q4.png",
+        "c_image": "c_q4.png",
+        "python_image": "python_q4.png",
+        "test_cases": [
+            {
+                "input": "boxes = [1,3,2,2,2,3,4,3,1]",
+                "expected_output": "23"
+            },
+            {
+                "input": "boxes = [1,1,1]",
+                "expected_output": "9"
+            },
+            {
+                "input": "boxes = [1]",
+                "expected_output": "1"
+            }
+        ],
+        "description": "Find the bug in the code that calculates the maximum points that can be obtained by removing boxes with the given algorithm.",
+        "correct_answer": "Optimize subproblems"
+    },
+    {
+        "id": 5,
+        "description": "Find the galaxy and stars within them from a given 3xN matrix of characters { #, *, . }.",
+        "test_cases": [
+            {
+                "input": "18\n* . * # * * * # * * * # * * * . * .\n* . * # * . * # . * . # * * * * * *\n* * * # * * * # * * * # * * * * . *",
+                "expected_output": "U#O#I#EA"
+            }
+        ],
+        'correct_answer' : 'i=0',
     }
 ]
+
+
 @app.route('/')
 @check_termination
 def index():
