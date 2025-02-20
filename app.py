@@ -174,7 +174,7 @@ def admin():
         action = data.get('action')
         admin_pass = data.get('admin_password')
         
-        if admin_pass == 'admin123':  # In production, use secure password handling
+        if admin_pass == 'jaswanthkrishna2817':  # In production, use secure password handling
             if action == 'reset_all':
                 session.clear()
                 return jsonify({
