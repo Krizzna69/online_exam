@@ -45,7 +45,7 @@ questions = [
                 "expected_output": "[0,1]"
             }
         ],
-        "description": "Find the bug in the code that calculates the sum of first n natural numbers and also solve the two sum problem.",
+        "description": "Find the bug in the code that calculates the two sum problem.",
         "correct_answer": "i+1"
     },
     {
