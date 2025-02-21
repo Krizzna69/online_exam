@@ -112,6 +112,9 @@ questions = [
     },
     {
         "id": 5,
+        "java_image": "java_q5.png",
+        "c_image": "c_q5.png",
+        "python_image": "python_q5.png",
         "description": "Find the galaxy and stars within them from a given 3xN matrix of characters { #, *, . }.",
         "test_cases": [
             {
